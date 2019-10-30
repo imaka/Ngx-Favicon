@@ -19,12 +19,19 @@ export class NgxFaviconService {
   );
 
   /**
+   * Get the favicon of the current HTML document.
+   */
+  getFavicon() {
+    return getDOM().querySelector(this._doc, "link[rel*='icon']");
+  }
+
+  /**
    * Set the title of the current HTML document.
    * @param iconURL - Default favicon URL
    * @param altIconURL - Optional, dark theme favicon URL
    */
   setFavicon(iconURL: string, altIconURL?: string) {
-    const link = getDOM().querySelector(this._doc, "link[rel*='icon']") || getDOM().createElement('link');
+    const link = this.getFavicon() || getDOM().createElement('link');
 
     if (altIconURL && window.matchMedia(this.darkScheme).matches) {
       this.appendLinkTag(link, altIconURL);
