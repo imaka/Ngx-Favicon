@@ -1,6 +1,6 @@
 {
-  "name": "ngx-favicon",
-  "version": "0.0.1",
+  "name": "angular-favicon",
+  "version": "0.0.3",
   "description": "Angular service to set the favicon of a site, and an alternative one for dark mode",
   "author": "Diego Perez <dperezmartinez@gmail.com>",
   "homepage": "https://imaka.github.io",
@@ -9,6 +9,16 @@
     "type": "git",
     "url": "https://github.com/imaka/Ngx-Favicon.git"
   },
+  "keywords": [
+    "angular",
+    "browser icon",
+    "browser tab icon",
+    "change favicon",
+    "favicon",
+    "icon",
+    "ngx",
+    "set favicon"
+  ],
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
