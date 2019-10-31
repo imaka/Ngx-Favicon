@@ -1,27 +1,34 @@
 # NgxFavicon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
+Use this Angular service to set the favicon of a site. 
 
-## Development server
+You can also set an alternative favicon. This second favicon will be automatically shown when the browser/OS theme is set (or switches!) to dark mode.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+Install via npm:
+```shell
+npm install --save ngx-favicon
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Use it anywhere in your project:
+```js
+import { Component, OnInit } from '@angular/core';
+import { NgxFaviconService } from 'ngx-favicon';
 
-## Build
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  constructor(private ngxFavicon: NgxFaviconService) {}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  ngOnInit() {
+    this.ngxFavicon.setFavicon(favicon_url);
+    // OR 
+    this.ngxFavicon.setFavicon(favicon_url, alt_favicon_url);
+  }
+}
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```

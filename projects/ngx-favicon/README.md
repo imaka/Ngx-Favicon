@@ -1,24 +1,34 @@
 # NgxFavicon
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+Use this Angular service to set the favicon of a site. 
 
-## Code scaffolding
+You can also set an alternative favicon. This second favicon will be automatically shown when the browser/OS theme is set (or switches!) to dark mode.
 
-Run `ng generate component component-name --project NgxFavicon` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project NgxFavicon`.
-> Note: Don't forget to add `--project NgxFavicon` or else it will be added to the default project in your `angular.json` file. 
+## Usage
 
-## Build
+Install via npm:
+```shell
+npm install --save ngx-favicon
+```
 
-Run `ng build NgxFavicon` to build the project. The build artifacts will be stored in the `dist/` directory.
+Use it anywhere in your project:
+```js
+import { Component, OnInit } from '@angular/core';
+import { NgxFaviconService } from 'ngx-favicon';
 
-## Publishing
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  constructor(private ngxFavicon: NgxFaviconService) {}
 
-After building your library with `ng build NgxFavicon`, go to the dist folder `cd dist/ngx-favicon` and run `npm publish`.
+  ngOnInit() {
+    this.ngxFavicon.setFavicon(favicon_url);
+    // OR 
+    this.ngxFavicon.setFavicon(favicon_url, alt_favicon_url);
+  }
+}
 
-## Running unit tests
-
-Run `ng test NgxFavicon` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
