@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
-import { fromEventPattern } from 'rxjs';
+import { fromEventPattern, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
 /**
@@ -10,10 +10,11 @@ import { pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AngularFaviconService {
+export class AngularFaviconService implements OnDestroy {
   constructor(@Inject(DOCUMENT) private _doc: any) {}
 
   private darkScheme = '(prefers-color-scheme:dark)';
+  private subscriptionToColorScheme: Subscription;
   private prefersColorScheme$ = fromEventPattern(handler => window.matchMedia(this.darkScheme).addListener(handler as EventListener)).pipe(
     pluck('matches')
   );
@@ -48,7 +49,7 @@ export class AngularFaviconService {
    * @param altIconURL - Optional, dark theme favicon URL
    */
   private subscribeToChangesInTheme(link: any, iconURL: string, altIconURL: string) {
-    this.prefersColorScheme$.subscribe(isDarkTheme => {
+    this.subscription = this.prefersColorScheme$.subscribe(isDarkTheme => {
       if (isDarkTheme) {
         this.appendLinkTag(link, altIconURL);
       } else {
@@ -69,5 +70,9 @@ export class AngularFaviconService {
     getDOM()
       .getElementsByTagName(this._doc, 'head')[0]
       .appendChild(link);
+  }
+
+  ngOnDestroy() {
+    this.subscriptionToColorScheme.unsubscribe();
   }
 }
