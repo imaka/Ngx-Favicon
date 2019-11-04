@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-favicon": {
+    "angular-favicon": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-favicon",
+            "outputPath": "dist/angular-favicon",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-favicon:build"
+            "browserTarget": "angular-favicon:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-favicon:build:production"
+              "browserTarget": "angular-favicon:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-favicon:build"
+            "browserTarget": "angular-favicon:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "ngx-favicon-e2e": {
+    "angular-favicon-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-favicon:serve"
+            "devServerTarget": "angular-favicon:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-favicon:serve:production"
+              "devServerTarget": "angular-favicon:serve:production"
             }
           }
         },
@@ -135,33 +135,33 @@
         }
       }
     },
-    "NgxFavicon": {
-      "root": "projects/ngx-favicon",
-      "sourceRoot": "projects/ngx-favicon/src",
+    "AngularFavicon": {
+      "root": "projects/angular-favicon",
+      "sourceRoot": "projects/angular-favicon/src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-favicon/tsconfig.lib.json",
-            "project": "projects/ngx-favicon/ng-package.json"
+            "tsConfig": "projects/angular-favicon/tsconfig.lib.json",
+            "project": "projects/angular-favicon/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-favicon/src/test.ts",
-            "tsConfig": "projects/ngx-favicon/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-favicon/karma.conf.js"
+            "main": "projects/angular-favicon/src/test.ts",
+            "tsConfig": "projects/angular-favicon/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-favicon/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-favicon/tsconfig.lib.json",
-              "projects/ngx-favicon/tsconfig.spec.json"
+              "projects/angular-favicon/tsconfig.lib.json",
+              "projects/angular-favicon/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -171,5 +171,5 @@
       }
     }
   },
-  "defaultProject": "ngx-favicon"
+  "defaultProject": "angular-favicon"
 }

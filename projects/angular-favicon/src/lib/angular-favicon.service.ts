@@ -10,7 +10,7 @@ import { pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class NgxFaviconService {
+export class AngularFaviconService {
   constructor(@Inject(DOCUMENT) private _doc: any) {}
 
   private darkScheme = '(prefers-color-scheme:dark)';

@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
-import { NgxFaviconService } from './ngx-favicon.service';
+import { AngularFaviconService } from './angular-favicon.service';
 
-describe('NgxFaviconService', () => {
+describe('AngularFaviconService', () => {
   let doc: Document;
   let initialFavicon: any;
-  let faviconService: NgxFaviconService;
+  let faviconService: AngularFaviconService;
   const testFaviconUrl = 'test_favicon_url';
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     doc = getDOM().createHtmlDocument();
     initialFavicon = getDOM().querySelector(doc, "link[rel*='icon']");
-    faviconService = new NgxFaviconService(doc);
+    faviconService = new AngularFaviconService(doc);
   });
 
   it('should be created', () => {
-    const service: NgxFaviconService = TestBed.get(NgxFaviconService);
+    const service: AngularFaviconService = TestBed.get(AngularFaviconService);
     expect(service).toBeTruthy();
   });
   it('should allow reading initial favicon', () => {

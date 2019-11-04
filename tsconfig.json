@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ngx-favicon": [
-        "dist/ngx-favicon"
+      "angular-favicon": [
+        "dist/angular-favicon"
       ],
-      "ngx-favicon/*": [
-        "dist/ngx-favicon/*"
+      "angular-favicon/*": [
+        "dist/angular-favicon/*"
       ]
     }
   }

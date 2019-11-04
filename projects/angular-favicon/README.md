@@ -1,4 +1,4 @@
-# NgxFavicon
+# Angular Favicon
 
 Use this Angular service to set the favicon of a site. 
 
@@ -8,13 +8,13 @@ You can also set an alternative favicon. This second favicon will be automatical
 
 Install via npm:
 ```shell
-npm install --save ngx-favicon
+npm install --save angular-favicon
 ```
 
 Use it anywhere in your project:
 ```js
 import { Component, OnInit } from '@angular/core';
-import { NgxFaviconService } from 'ngx-favicon';
+import { AngularFaviconService } from 'angular-favicon';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ import { NgxFaviconService } from 'ngx-favicon';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private ngxFavicon: NgxFaviconService) {}
+  constructor(private ngxFavicon: AngularFaviconService) {}
 
   ngOnInit() {
     this.ngxFavicon.setFavicon(favicon_url);
