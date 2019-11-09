@@ -49,7 +49,7 @@ export class AngularFaviconService implements OnDestroy {
    * @param altIconURL - Optional, dark theme favicon URL
    */
   private subscribeToChangesInTheme(link: any, iconURL: string, altIconURL: string) {
-    this.subscription = this.prefersColorScheme$.subscribe(isDarkTheme => {
+    this.subscriptionToColorScheme = this.prefersColorScheme$.subscribe(isDarkTheme => {
       if (isDarkTheme) {
         this.appendLinkTag(link, altIconURL);
       } else {
