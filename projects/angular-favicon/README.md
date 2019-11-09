@@ -1,3 +1,7 @@
+![downloads](https://img.shields.io/npm/dt/angular-favicon?style=flat-square)
+![license](https://img.shields.io/npm/l/angular-favicon?style=flat-square)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 # Angular Favicon
 
 Use this Angular service to set the favicon of a site. 
