@@ -34,9 +34,12 @@ export class AngularFaviconService implements OnDestroy {
   setFavicon(iconURL: string, altIconURL?: string) {
     const link = this.getFavicon() || getDOM().createElement('link');
 
-    if (altIconURL && window.matchMedia(this.darkScheme).matches) {
-      this.appendLinkTag(link, altIconURL);
+    if (altIconURL) {
       this.subscribeToChangesInTheme(link, iconURL, altIconURL);
+
+      if (window.matchMedia(this.darkScheme).matches) {
+        this.appendLinkTag(link, altIconURL);
+      }
     } else {
       this.appendLinkTag(link, iconURL);
     }
