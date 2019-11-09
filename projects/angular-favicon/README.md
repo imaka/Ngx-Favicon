@@ -8,6 +8,8 @@ Use this Angular service to set the favicon of a site.
 
 You can also set an alternative favicon. This second favicon will be automatically shown when the browser/OS theme is set (or switches!) to dark mode.
 
+![](favicon-demo.gif)
+
 ## Usage
 
 Install via npm:
