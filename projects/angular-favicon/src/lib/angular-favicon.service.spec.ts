@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
-import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 import { AngularFaviconService } from './angular-favicon.service';
+import { RendererFactory2 } from '@angular/core';
 
 describe('AngularFaviconService', () => {
   let doc: Document;
   let initialFavicon: any;
   let faviconService: AngularFaviconService;
+  let rendererFactory2: RendererFactory2;
   const testFaviconUrl = 'test_favicon_url';
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    doc = getDOM().createHtmlDocument();
-    initialFavicon = getDOM().querySelector(doc, "link[rel*='icon']");
-    faviconService = new AngularFaviconService(doc);
+    initialFavicon = doc.querySelector("link[rel*='icon']");
+    faviconService = new AngularFaviconService(doc, rendererFactory2);
   });
 
   it('should be created', () => {
-    const service: AngularFaviconService = TestBed.get(AngularFaviconService);
+    const service: AngularFaviconService = TestBed.inject(AngularFaviconService);
     expect(service).toBeTruthy();
   });
   it('should allow reading initial favicon', () => {
@@ -31,8 +31,8 @@ describe('AngularFaviconService', () => {
 
   it('should set a favicon on the injected document', () => {
     faviconService.setFavicon(testFaviconUrl);
-    const faviconHrefByDOM = getDOM()
-      .querySelector(doc, "link[rel*='icon']")
+    const faviconHrefByDOM = doc
+      .querySelector("link[rel*='icon']")
       .href.split('/')
       .pop();
     const faviconHrefByService = faviconService
