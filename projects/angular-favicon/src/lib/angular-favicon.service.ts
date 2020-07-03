@@ -1,6 +1,5 @@
-import { Injectable, Inject, OnDestroy } from '@angular/core';
+import { Injectable, Inject, OnDestroy, Renderer2, RendererFactory2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 import { fromEventPattern, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
@@ -11,7 +10,11 @@ import { pluck } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AngularFaviconService implements OnDestroy {
-  constructor(@Inject(DOCUMENT) private _doc: any) {}
+  private renderer: Renderer2;
+
+  constructor(@Inject(DOCUMENT) private _doc: any, private rendererFactory: RendererFactory2) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   private darkScheme = '(prefers-color-scheme:dark)';
   private subscriptionToColorScheme: Subscription;
@@ -23,7 +26,7 @@ export class AngularFaviconService implements OnDestroy {
    * Get the favicon of the current HTML document.
    */
   getFavicon() {
-    return getDOM().querySelector(this._doc, "link[rel*='icon']");
+    return this._doc.querySelector("link[rel*='icon']");
   }
 
   /**
@@ -32,7 +35,7 @@ export class AngularFaviconService implements OnDestroy {
    * @param altIconURL - Optional, dark theme favicon URL
    */
   setFavicon(iconURL: string, altIconURL?: string) {
-    const link = this.getFavicon() || getDOM().createElement('link');
+    const link = this.getFavicon() || this.renderer.createElement('link');
     let currentLinkHref = iconURL;
 
     if (altIconURL) {
@@ -71,9 +74,8 @@ export class AngularFaviconService implements OnDestroy {
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
     link.href = iconURL;
-    getDOM()
-      .getElementsByTagName(this._doc, 'head')[0]
-      .appendChild(link);
+    const head = this._doc.getElementsByTagName('head')[0];
+    this.renderer.appendChild(head, link);
   }
 
   ngOnDestroy() {
