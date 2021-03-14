@@ -79,6 +79,8 @@ export class AngularFaviconService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptionToColorScheme.unsubscribe();
+    if (this.subscriptionToColorScheme) {
+      this.subscriptionToColorScheme.unsubscribe();
+    }
   }
 }
