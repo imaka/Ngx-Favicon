@@ -6,25 +6,42 @@ on:
       - master
 
 jobs:
+  install:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: npm install
 
   test:
 
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
 
     name: Test library
     steps:
       - name: Use karma
-        run: ng test AngularFavicon
+        run: ng test
 
   build:
 
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
+    - name: Use Node.js 12.8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.8
+    - name: Install dependencies
+      run: npm install
+    - name: Use karma
+      run: npm run test
     - name: Build library
-      run: ng build AngularFavicon
+      run: npm run build
     - name: Try to publish
+      working-directory: ./dist/angular-favicon
       run: |
         npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
         npm publish || true
