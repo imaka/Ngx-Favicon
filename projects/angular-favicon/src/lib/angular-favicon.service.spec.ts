@@ -1,18 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFaviconService } from './angular-favicon.service';
-import { RendererFactory2 } from '@angular/core';
+import { Renderer2, RendererFactory2 } from '@angular/core';
 
 describe('AngularFaviconService', () => {
-  let doc: Document;
-  let initialFavicon: any;
+  let initialFavicon: HTMLLinkElement;
   let faviconService: AngularFaviconService;
-  let rendererFactory2: RendererFactory2;
   const testFaviconUrl = 'test_favicon_url';
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    initialFavicon = doc.querySelector("link[rel*='icon']");
-    faviconService = new AngularFaviconService(doc, rendererFactory2);
+    initialFavicon = document.querySelector("link[rel*='icon']");
+    const rendererStub = ({
+      createElement: jasmine.createSpy('createElement')
+    } as unknown) as Renderer2;
+    const rendererSpyFactory = jasmine.createSpyObj('RendererFactory2', ['createRenderer']);
+    faviconService = new AngularFaviconService(document, rendererSpyFactory);
+    rendererSpyFactory.createRenderer.and.returnValue(rendererStub);
   });
 
   it('should be created', () => {
@@ -31,10 +34,8 @@ describe('AngularFaviconService', () => {
 
   it('should set a favicon on the injected document', () => {
     faviconService.setFavicon(testFaviconUrl);
-    const faviconHrefByDOM = doc
-      .querySelector("link[rel*='icon']")
-      .href.split('/')
-      .pop();
+    const faviconLink = document.querySelector("link[rel*='icon']") as HTMLLinkElement;
+    const faviconHrefByDOM = faviconLink.href.split('/').pop();
     const faviconHrefByService = faviconService
       .getFavicon()
       .href.split('/')
